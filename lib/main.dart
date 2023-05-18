@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     LocatorBrain locator = LocatorBrain();
-    print(locator.getCurrentPosition());
+    locator.getCurrentPosition().then((value) => print(value.latitude));
   }
 
   @override
