@@ -1,3 +1,4 @@
+import 'package:climata/locator_brain.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +11,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Climata',
-      home: HomePage(),
+      theme: ThemeData.dark().copyWith(
+          primaryColor: Colors.orange,
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.orange)),
+      home: const HomePage(),
     );
   }
 }
@@ -26,10 +30,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+
+    LocatorBrain locator = LocatorBrain();
+    print(locator.getCurrentPosition());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Climata"),
+        centerTitle: true,
       ),
       body: const SafeArea(child: Text("hello")),
     );
