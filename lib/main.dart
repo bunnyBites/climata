@@ -17,19 +17,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Climata',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.blue,
-            statusBarIconBrightness: Brightness.light,
-            statusBarBrightness: Brightness.light,
-          ),
-        ),
-      ),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
@@ -55,7 +45,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light, 
+      value: SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.blue.shade300),
       child: Scaffold(
         body: SafeArea(
             child: Container(
