@@ -12,4 +12,11 @@ const kCurrentDateTextStyle = TextStyle(
   fontWeight: FontWeight.w400,
 );
 
+const kWeatherTitleTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 20.0,
+);
+
+const kSizedBoxHeightForWeatherInfo = 28.0;
 const kSizedBoxHeight = 12.0;
+const kSizedBoxWidth = 5.0;

@@ -1,9 +1,8 @@
-import 'package:climata/components/widget_container.dart';
+import 'package:climata/components/weather_info_provider.dart';
 import 'package:climata/locator_brain.dart';
 import 'package:climata/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 
 import 'components/weather_icon.dart';
 import 'constants/constants.dart';
@@ -18,9 +17,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Climata',
-      home: HomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.blue,
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.light,
+          ),
+        ),
+      ),
+      home: const HomePage(),
     );
   }
 }
@@ -45,8 +54,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion(
-      value: SystemUiOverlayStyle.dark, //<-- SEE HERE
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light, 
       child: Scaffold(
         body: SafeArea(
             child: Container(
@@ -82,7 +91,7 @@ class _HomePageState extends State<HomePage> {
               // weather icon
 
               // weather information card
-              const WidgetContainer()
+              const WeatherInfoProvider()
             ],
           ),
         )),
