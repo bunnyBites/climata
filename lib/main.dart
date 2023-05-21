@@ -1,5 +1,8 @@
+import 'package:climata/components/widget_container.dart';
 import 'package:climata/locator_brain.dart';
 import 'package:flutter/material.dart';
+
+import 'components/weather_icon.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,28 +34,37 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     LocatorBrain locator = LocatorBrain();
-    locator.getCurrentPosition().then((value) => {
-      print(locator.latitude),
-      print(locator.longitude)
-    });
+    locator
+        .getCurrentPosition()
+        .then((value) => {print(locator.latitude), print(locator.longitude)});
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Container(
+      body: SafeArea(
+          child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-            colors: [
+            gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [
               Colors.blue,
               Colors.blue.shade300,
-            ]
-          )
+            ])),
+        child: const Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // weather icon
+            WeatherIcon(),
+            // temperature display
+            // weather description
+            // current date display
+            // weather information card
+            WidgetContainer()
+          ],
         ),
-        
       )),
     );
   }
