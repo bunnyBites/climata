@@ -11,12 +11,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Climata',
-      theme: ThemeData.dark().copyWith(
-          primaryColor: Colors.orange,
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.orange)),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
@@ -34,17 +31,29 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     LocatorBrain locator = LocatorBrain();
-    locator.getCurrentPosition().then((value) => print(value.latitude));
+    locator.getCurrentPosition().then((value) => {
+      print(locator.latitude),
+      print(locator.longitude)
+    });
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Climata"),
-        centerTitle: true,
-      ),
-      body: const SafeArea(child: Text("hello")),
+      body: SafeArea(child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: [
+              Colors.blue,
+              Colors.blue.shade300,
+            ]
+          )
+        ),
+        
+      )),
     );
   }
 }
