@@ -89,6 +89,11 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // current location display
+              (weatherDetails != null
+                  ? currentLocationView()
+                  : const Placeholder()),
+
               Expanded(
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -114,6 +119,31 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         )),
+      ),
+    );
+  }
+
+  Container currentLocationView() {
+    return Container(
+      margin: const EdgeInsets.only(top: 18),
+      color: Colors.blue.shade300,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.location_on,
+              color: Colors.white,
+              size: kWeatherInfoIconSize,
+            ),
+            const SizedBox(width: kSizedBoxWidth),
+            Text(
+              weatherDetails?['data']?[0]['city_name'],
+              style: kLocationNameTextStyle,
+            )
+          ],
+        ),
       ),
     );
   }

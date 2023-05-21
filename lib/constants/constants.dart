@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+const kLocationNameTextStyle = TextStyle(
+  fontSize: 20.0,
+  color: Colors.white,
+);
+
 const kTitleTextStyle = TextStyle(
   fontSize: 20.0,
   color: Colors.white,
