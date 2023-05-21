@@ -46,6 +46,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   dynamic weatherDetails;
+  dynamic weatherForecast;
   bool isLoading = false;
 
   @override
@@ -62,6 +63,7 @@ class _HomePageState extends State<HomePage> {
     locator.getCurrentPosition().then((value) => {
           setState(() {
             weatherDetails = locator.weatherDetails;
+            weatherForecast = locator.weatherForecast;
             isLoading = false;
           })
         });
@@ -92,7 +94,7 @@ class _HomePageState extends State<HomePage> {
               // current location display
               (weatherDetails != null
                   ? currentLocationView()
-                  : const Placeholder()),
+                  : Container()),
 
               Expanded(
                   child: Column(
@@ -115,7 +117,10 @@ class _HomePageState extends State<HomePage> {
               )),
 
               // weather information card
-              WeatherInfoProvider(weatherInfo: weatherDetails)
+              WeatherInfoProvider(
+                weatherInfo: weatherDetails,
+                weatherForecast: weatherForecast,
+              )
             ],
           ),
         )),

@@ -1,17 +1,19 @@
+import 'package:climata/components/weather_forecast.dart';
 import 'package:climata/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class WeatherInfoProvider extends StatelessWidget {
   final dynamic weatherInfo;
+  final dynamic weatherForecast;
 
   const WeatherInfoProvider({
     super.key,
-    this.weatherInfo
+    this.weatherInfo,
+    this.weatherForecast,
   });
 
   @override
   Widget build(BuildContext context) {
-
     return Expanded(
       child: Container(
           margin: const EdgeInsets.all(25.0),
@@ -35,22 +37,27 @@ class WeatherInfoProvider extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    weatherInfoContainer(
-                        Icons.thermostat_rounded, "Feels like", weatherInfo?['data']?[0]['app_temp']),
-                    weatherInfoContainer(
-                        Icons.air_outlined, "Wind Speed", weatherInfo?['data']?[0]['wind_spd']),
+                    weatherInfoContainer(Icons.thermostat_rounded, "Feels like",
+                        weatherInfo?['data']?[0]['app_temp']),
+                    weatherInfoContainer(Icons.air_outlined, "Wind Speed",
+                        weatherInfo?['data']?[0]['wind_spd']),
                   ],
                 ),
                 const SizedBox(height: kSizedBoxHeightForWeatherInfo),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    weatherInfoContainer(
-                        Icons.thunderstorm_outlined, "Precipitation", weatherInfo?['data']?[0]['pres']),
-                    weatherInfoContainer(
-                        Icons.speed_outlined, "Humidity", weatherInfo?['data']?[0]['rh']),
+                    weatherInfoContainer(Icons.thunderstorm_outlined,
+                        "Precipitation", weatherInfo?['data']?[0]['pres']),
+                    weatherInfoContainer(Icons.speed_outlined, "Humidity",
+                        weatherInfo?['data']?[0]['rh']),
                   ],
                 ),
+
+                // weather forecast section
+                (weatherForecast != null
+                    ? WeatherForecast(weatherForecast: weatherForecast)
+                    : Container())
               ],
             ),
           )),
@@ -75,7 +82,7 @@ class WeatherInfoProvider extends StatelessWidget {
                 style: kWeatherInfoHeadingTextStyle,
               ),
               Text(
-                (value.toStringAsFixed(2) ?? "-"),
+                (value?.toStringAsFixed(2) ?? "-"),
                 style: kWeatherInfoValueTextStyle,
               ),
             ],

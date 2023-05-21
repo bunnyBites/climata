@@ -16,4 +16,16 @@ class WeatherService {
 
     return json.decode(response.body);
   }
+
+  static Future<dynamic> getWeatherForecastByQuery(double latitude, double longitude) async {
+    Uri url = Uri.https(baseUrl, "/v2.0/forecast/hourly", {
+      "lat": latitude.toString(),
+      "lon": longitude.toString(),
+      "key": apiKey
+    });
+
+    dynamic response = await http.get(url);
+
+    return json.decode(response.body);
+  }
 }

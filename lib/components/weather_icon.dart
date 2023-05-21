@@ -1,4 +1,3 @@
-import 'package:climata/service/locator_brain.dart';
 import 'package:climata/util/util.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +29,7 @@ class WeatherIcon extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(left: 120),
             child: Text(
-              '${weatherDetails?['data']?[0]['temp'].toStringAsFixed(0) ?? 0}\u00b0c',
+              '${weatherDetails?['data']?[0]['temp']?.toStringAsFixed(0) ?? 0}\u00b0c',
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 90,

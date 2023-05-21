@@ -6,6 +6,12 @@ class ClimataUtil {
     return DateFormat.yMMMMEEEEd().format(currentUnformattedDate);
   }
 
+  static String formatProviderDate(String providedDate) {
+    DateTime inputDateTime = DateFormat("yyyy-MM-dd'T'hh:mm:ss").parse(providedDate);
+
+    return DateFormat("hh:mm a").format(inputDateTime);
+  }
+
   static String getWeatherDescription(int? weatherCode, bool? isDay) {
     if (weatherCode == null || isDay == null) return "-";
     String meridian = (isDay == true ? "day" : "night");
