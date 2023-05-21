@@ -16,7 +16,7 @@ class WeatherInfoProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-          margin: const EdgeInsets.all(25.0),
+          margin: const EdgeInsets.all(20.0),
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(50)),

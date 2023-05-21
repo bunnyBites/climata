@@ -14,7 +14,7 @@ class WeatherForecast extends StatelessWidget {
     List<dynamic> weatherForecastData = weatherForecast?['data'];
 
     return Container(
-      height: 100,
+      height: 110,
       width: 120,
       margin: const EdgeInsets.only(top: kSizedBoxHeight),
       child: ListView(
