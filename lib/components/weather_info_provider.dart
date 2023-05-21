@@ -14,7 +14,7 @@ class WeatherInfoProvider extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(50)),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -39,8 +39,10 @@ class WeatherInfoProvider extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    weatherInfoContainer(Icons.thunderstorm_outlined, "Precipitation", "32"),
-                    weatherInfoContainer(Icons.speed_outlined, "Humidity", "123"),
+                    weatherInfoContainer(
+                        Icons.thunderstorm_outlined, "Precipitation", "32"),
+                    weatherInfoContainer(
+                        Icons.speed_outlined, "Humidity", "123"),
                   ],
                 ),
               ],
@@ -54,16 +56,22 @@ class WeatherInfoProvider extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            radius: 30,
+            radius: kWeatherInfoIconContainerRadius,
             backgroundColor: Colors.blue,
-            child: Icon(icon, size: 30, color: Colors.white),
+            child: Icon(icon, size: kWeatherInfoIconSize, color: Colors.white),
           ),
           const SizedBox(width: kSizedBoxWidth),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title),
-              Text(value),
+              Text(
+                title,
+                style: kWeatherInfoHeadingTextStyle,
+              ),
+              Text(
+                value,
+                style: kWeatherInfoValueTextStyle,
+              ),
             ],
           )
         ],
