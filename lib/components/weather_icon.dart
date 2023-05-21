@@ -23,17 +23,19 @@ class WeatherIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Stack(
+        alignment: Alignment.topCenter,
         children: [
-          Expanded(child: Image(image: AssetImage(prepareImagePath()))),
-          Text(
-            '${weatherDetails?['data']?[0]['temp'].toStringAsFixed(1) ?? 0}\u00b0c',
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 70,
-                fontWeight: FontWeight.w600),
+          Image(image: AssetImage(prepareImagePath()), width: 330),
+          Container(
+            margin: const EdgeInsets.only(left: 120),
+            child: Text(
+              '${weatherDetails?['data']?[0]['temp'].toStringAsFixed(0) ?? 0}\u00b0c',
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 90,
+                  fontWeight: FontWeight.w800),
+            ),
           )
         ],
       ),
