@@ -5,13 +5,17 @@ class WidgetContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
+    return Expanded(
+      child: Container(
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50), topRight: Radius.circular(50))),
+        child: const Text(
+          "hi",
+          textAlign: TextAlign.center,
+        ),
       ),
-      height: 70.0,
     );
   }
 }

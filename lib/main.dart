@@ -62,23 +62,25 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Expanded(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const WeatherIcon(),
+
+                  // weather description
+                  const Text(
+                    "Its a Cloudy day",
+                    textAlign: TextAlign.center,
+                    style: kTitleTextStyle,
+                  ),
+
+                  // current date display
+                  currentDateDisplay(),
+                ],
+              )),
               // weather icon
-              const WeatherIcon(),
-    
-              const SizedBox(height: kSizedBoxHeight),
-    
-              // weather description
-              const Text(
-                "Its a Cloudy day",
-                textAlign: TextAlign.center,
-                style: kTitleTextStyle,
-              ),
-    
-              const SizedBox(height: kSizedBoxHeight),
-              // current date display
-    
-              currentDateDisplay(),
-    
+
               // weather information card
               const WidgetContainer()
             ],
