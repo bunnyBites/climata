@@ -13,6 +13,8 @@ void main() {
   runApp(const MyApp());
 }
 
+LocatorBrain locator = LocatorBrain();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -46,8 +48,6 @@ class _HomePageState extends State<HomePage> {
   dynamic weatherDetails;
   bool isLoading = false;
 
-  LocatorBrain locator = LocatorBrain();
-
   @override
   void initState() {
     super.initState();
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void getWeatherDetails() {
-        setState(() {
+    setState(() {
       isLoading = true;
     });
 
@@ -93,11 +93,13 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const WeatherIcon(),
+                  WeatherIcon(weatherDetails: weatherDetails),
 
                   // weather description
-                  const Text(
-                    "Its a Cloudy day",
+                  Text(
+                    ClimataUtil.getWeatherDescription(
+                        weatherDetails?['data']?[0]['weather']['code'],
+                        (weatherDetails?['data']?[0]['pod'] == "d")),
                     textAlign: TextAlign.center,
                     style: kTitleTextStyle,
                   ),
@@ -108,7 +110,7 @@ class _HomePageState extends State<HomePage> {
               )),
 
               // weather information card
-              const WeatherInfoProvider()
+              WeatherInfoProvider(weatherInfo: weatherDetails)
             ],
           ),
         )),
@@ -127,7 +129,9 @@ class _HomePageState extends State<HomePage> {
           style: kCurrentDateTextStyle,
         ),
         IconButton(
-          onPressed: () { getWeatherDetails(); },
+          onPressed: () {
+            getWeatherDetails();
+          },
           icon: const Icon(Icons.refresh),
           color: Colors.white,
         )

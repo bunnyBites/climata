@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 const String apiKey = "5a0b16ac65a349339b6960355fa9cc87";
@@ -13,6 +14,6 @@ class WeatherService {
 
     dynamic response = await http.get(url);
 
-    return response;
+    return json.decode(response.body);
   }
 }

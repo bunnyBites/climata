@@ -2,7 +2,12 @@ import 'package:climata/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class WeatherInfoProvider extends StatelessWidget {
-  const WeatherInfoProvider({super.key});
+  final dynamic weatherInfo;
+
+  const WeatherInfoProvider({
+    super.key,
+    this.weatherInfo
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +36,9 @@ class WeatherInfoProvider extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     weatherInfoContainer(
-                        Icons.thermostat_rounded, "Feels like", "32"),
+                        Icons.thermostat_rounded, "Feels like", weatherInfo?['data']?[0]['app_temp']),
                     weatherInfoContainer(
-                        Icons.air_outlined, "Wind Speed", "123"),
+                        Icons.air_outlined, "Wind Speed", weatherInfo?['data']?[0]['wind_spd']),
                   ],
                 ),
                 const SizedBox(height: kSizedBoxHeightForWeatherInfo),
@@ -41,9 +46,9 @@ class WeatherInfoProvider extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     weatherInfoContainer(
-                        Icons.thunderstorm_outlined, "Precipitation", "32"),
+                        Icons.thunderstorm_outlined, "Precipitation", weatherInfo?['data']?[0]['pres']),
                     weatherInfoContainer(
-                        Icons.speed_outlined, "Humidity", "123"),
+                        Icons.speed_outlined, "Humidity", weatherInfo?['data']?[0]['rh']),
                   ],
                 ),
               ],
@@ -52,7 +57,7 @@ class WeatherInfoProvider extends StatelessWidget {
     );
   }
 
-  Expanded weatherInfoContainer(IconData icon, String title, String value) {
+  Expanded weatherInfoContainer(IconData icon, String title, dynamic value) {
     return Expanded(
       child: Row(
         children: [
@@ -70,7 +75,7 @@ class WeatherInfoProvider extends StatelessWidget {
                 style: kWeatherInfoHeadingTextStyle,
               ),
               Text(
-                value,
+                (value.toStringAsFixed(2) ?? "-"),
                 style: kWeatherInfoValueTextStyle,
               ),
             ],
