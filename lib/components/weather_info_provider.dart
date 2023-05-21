@@ -6,6 +6,7 @@ class WeatherInfoProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Expanded(
       child: Container(
           margin: const EdgeInsets.all(25.0),
@@ -57,7 +58,7 @@ class WeatherInfoProvider extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: kWeatherInfoIconContainerRadius,
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.blue[400],
             child: Icon(icon, size: kWeatherInfoIconSize, color: Colors.white),
           ),
           const SizedBox(width: kSizedBoxWidth),

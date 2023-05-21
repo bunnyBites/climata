@@ -1,8 +1,10 @@
 import 'package:climata/components/weather_info_provider.dart';
-import 'package:climata/locator_brain.dart';
+import 'package:climata/service/locator_brain.dart';
 import 'package:climata/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import 'components/weather_icon.dart';
 import 'constants/constants.dart';
@@ -17,9 +19,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Climata',
-      home: HomePage(),
+      home: LoaderOverlay(
+        useDefaultLoading: false,
+        overlayWidget: Center(
+          child: SpinKitChasingDots(
+            color: Colors.blue.shade900,
+            size: 50.0,
+          ),
+        ),
+        child: const HomePage(),
+      ),
     );
   }
 }
@@ -32,20 +43,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  dynamic weatherDetails;
+  bool isLoading = false;
+
+  LocatorBrain locator = LocatorBrain();
+
   @override
   void initState() {
     super.initState();
+    getWeatherDetails();
+  }
 
-    LocatorBrain locator = LocatorBrain();
-    locator
-        .getCurrentPosition()
-        .then((value) => {print(locator.latitude), print(locator.longitude)});
+  void getWeatherDetails() {
+        setState(() {
+      isLoading = true;
+    });
+
+    locator.getCurrentPosition().then((value) => {
+          setState(() {
+            weatherDetails = locator.weatherDetails;
+            isLoading = false;
+          })
+        });
   }
 
   @override
   Widget build(BuildContext context) {
+    (isLoading) ? context.loaderOverlay.show() : context.loaderOverlay.hide();
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.blue.shade300),
+      value: SystemUiOverlayStyle.dark
+          .copyWith(statusBarColor: Colors.blue.shade300),
       child: Scaffold(
         body: SafeArea(
             child: Container(
@@ -78,7 +106,6 @@ class _HomePageState extends State<HomePage> {
                   currentDateDisplay(),
                 ],
               )),
-              // weather icon
 
               // weather information card
               const WeatherInfoProvider()
@@ -100,7 +127,7 @@ class _HomePageState extends State<HomePage> {
           style: kCurrentDateTextStyle,
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () { getWeatherDetails(); },
           icon: const Icon(Icons.refresh),
           color: Colors.white,
         )
