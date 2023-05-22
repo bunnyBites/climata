@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
       value: SystemUiOverlayStyle.dark
           .copyWith(statusBarColor: Colors.blue.shade300),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
             child: Container(
           decoration: BoxDecoration(
