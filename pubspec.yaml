@@ -40,6 +40,7 @@ dependencies:
   http: ^0.13.6
   loader_overlay: ^2.2.0
   flutter_spinkit: ^5.2.0
+  searchfield: ^0.8.3
 
 dev_dependencies:
   flutter_test:

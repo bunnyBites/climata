@@ -1,3 +1,4 @@
+import 'package:climata/components/location_finder.dart';
 import 'package:climata/components/weather_info_provider.dart';
 import 'package:climata/service/locator_brain.dart';
 import 'package:climata/util/util.dart';
@@ -91,15 +92,13 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // current location display
-              (weatherDetails != null
-                  ? currentLocationView()
-                  : Container()),
-
               Expanded(
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Location finder
+                  const LocationFinder(),
+
                   WeatherIcon(weatherDetails: weatherDetails),
 
                   // weather description
@@ -115,6 +114,8 @@ class _HomePageState extends State<HomePage> {
                   currentDateDisplay(),
                 ],
               )),
+              // current location display
+              (weatherDetails != null ? currentLocationView() : Container()),
 
               // weather information card
               WeatherInfoProvider(
@@ -131,7 +132,6 @@ class _HomePageState extends State<HomePage> {
   Container currentLocationView() {
     return Container(
       margin: const EdgeInsets.only(top: 18),
-      color: Colors.blue.shade300,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Row(
