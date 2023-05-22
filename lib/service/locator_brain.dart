@@ -4,14 +4,15 @@ import 'package:geolocator/geolocator.dart';
 class LocatorBrain {
   dynamic weatherDetails;
   dynamic weatherForecast;
-  double latitude = 10.7905;
-  double longitude = 78.7047;
+  double latitude = 0;
+  double longitude = 0;
 
   Future<void> getCurrentPosition() async {
 
-    // Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    latitude = position.latitude;
+    longitude = position.longitude;
 
-    // TODO apply current location fetched from geo location
     weatherDetails = await WeatherService.getCurrentWeatherByQuery(latitude, longitude);
     weatherForecast = await WeatherService.getWeatherForecastByQuery(latitude, longitude);
   }

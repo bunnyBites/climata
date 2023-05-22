@@ -32,6 +32,11 @@ const kWeatherInfoHeadingTextStyle = TextStyle(
   // fontSize: 16.0,
 );
 
+const kWeatherForecastValueTextStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.bold,
+);
+
 const int kWeatherInfoHeadingColor = 0xFFA0A0A0;
 const double kWeatherInfoIconContainerRadius = 30.0;
 const double kWeatherInfoIconSize = 32.0;

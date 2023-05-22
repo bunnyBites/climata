@@ -37,7 +37,7 @@ class WeatherForecast extends StatelessWidget {
           children: [
             Text(
               ClimataUtil.formatProviderDate(wForecast['timestamp_local']),
-              style: const TextStyle(color: Colors.black),
+              style: kWeatherInfoHeadingTextStyle,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -49,7 +49,7 @@ class WeatherForecast extends StatelessWidget {
             ),
             Text(
               '${wForecast['temp'].toStringAsFixed(1)}\u00b0c',
-              style: const TextStyle(color: Colors.black),
+              style: kWeatherForecastValueTextStyle,
             ),
           ],
         ),

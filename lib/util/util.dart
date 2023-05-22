@@ -37,7 +37,7 @@ class ClimataUtil {
     } else if (weatherCode < 711) {
       return 'Its a misty $meridian';
     } else if (weatherCode < 750) {
-      return 'Its a foggy $meridian';
+      return 'Its a Hazy $meridian';
     } else if (weatherCode == 800) {
       return 'Its a clear sky, the perfect $meridian';
     } else if (weatherCode < 900) {
