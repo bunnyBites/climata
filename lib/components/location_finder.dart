@@ -87,6 +87,7 @@ class _LocationFinderState extends State<LocationFinder> {
           return null;
         },
         maxSuggestionsInViewPort: 4,
+
         itemHeight: 45,
         textCapitalization: TextCapitalization.words,
       ),
