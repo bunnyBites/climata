@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
       home: LoaderOverlay(
         useDefaultLoading: false,
         overlayWidget: Center(
-          child: SpinKitCubeGrid(
-            color: Colors.blue.shade900,
+          child: SpinKitSquareCircle(
+            color: Colors.blue.shade700,
             size: 80.0,
           ),
         ),
@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
   dynamic weatherDetails;
   dynamic weatherForecast;
   bool isLoading = false;
+  final _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -73,6 +74,7 @@ class _HomePageState extends State<HomePage> {
   void searchWeatherDetails(String locationName) {
     setState(() {
       isLoading = true;
+      locationName = locationName;
     });
 
     locator.getLatLonByLocationName(locationName).then((value) => {
@@ -112,7 +114,10 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Location finder
-                  LocationFinder(onSelectLocation: searchWeatherDetails),
+                  LocationFinder(
+                    onSelectLocation: searchWeatherDetails,
+                    searchController: _searchController,
+                  ),
 
                   WeatherIcon(weatherDetails: weatherDetails),
 
@@ -180,6 +185,7 @@ class _HomePageState extends State<HomePage> {
         ),
         IconButton(
           onPressed: () {
+            _searchController.clear();
             getWeatherDetails();
           },
           icon: const Icon(Icons.refresh),

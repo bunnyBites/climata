@@ -4,10 +4,12 @@ import 'package:searchfield/searchfield.dart';
 
 class LocationFinder extends StatefulWidget {
   final Function(String locationName) onSelectLocation;
+  final TextEditingController searchController;
 
   const LocationFinder({
     super.key,
     required this.onSelectLocation,
+    required this.searchController,
   });
 
   @override
@@ -67,6 +69,7 @@ class _LocationFinderState extends State<LocationFinder> {
           focus.unfocus();
         },
         focusNode: focus,
+        controller: widget.searchController,
         suggestions: locationList
             .map((locationName) => SearchFieldListItem(locationName,
                 item: locationName,
