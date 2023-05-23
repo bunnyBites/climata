@@ -13,7 +13,19 @@ class LocatorBrain {
     latitude = position.latitude;
     longitude = position.longitude;
 
+    await getWeatherDetails();
+  }
+
+  Future<void> getWeatherDetails() async {
     weatherDetails = await WeatherService.getCurrentWeatherByQuery(latitude, longitude);
     weatherForecast = await WeatherService.getWeatherForecastByQuery(latitude, longitude);
+  }
+
+  Future<void> getLatLonByLocationName(String locationName) async {
+    dynamic response = await WeatherService.getLatLonByLocationName(locationName);
+    latitude = response["lat"];
+    longitude = response["lon"];
+
+    await getWeatherDetails();
   }
 }

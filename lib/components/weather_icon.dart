@@ -21,11 +21,11 @@ class WeatherIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
-          Image(image: AssetImage(prepareImagePath()), width: 330),
+          Image(image: AssetImage(prepareImagePath()), width: 280, height: 250),
           Container(
             margin: const EdgeInsets.only(left: 120),
             child: Text(
