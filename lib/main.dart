@@ -27,9 +27,15 @@ class MyApp extends StatelessWidget {
       home: LoaderOverlay(
         useDefaultLoading: false,
         overlayWidget: Center(
-          child: SpinKitSquareCircle(
-            color: Colors.blue.shade700,
-            size: 80.0,
+          child: SpinKitFoldingCube(
+            size: 120.0,
+            itemBuilder: (BuildContext context, int index) {
+              return DecoratedBox(
+                decoration: BoxDecoration(
+                  color: index.isEven ? Colors.blue[300] : Colors.blue,
+                ),
+              );
+            },
           ),
         ),
         child: const HomePage(),
@@ -78,12 +84,12 @@ class _HomePageState extends State<HomePage> {
     });
 
     locator.getLatLonByLocationName(locationName).then((value) => {
-      setState(() {
-        weatherDetails = locator.weatherDetails;
-        weatherForecast = locator.weatherForecast;
-        isLoading = false;
-      })
-    });
+          setState(() {
+            weatherDetails = locator.weatherDetails;
+            weatherForecast = locator.weatherForecast;
+            isLoading = false;
+          })
+        });
   }
 
   @override
@@ -96,55 +102,57 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SafeArea(
-            child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.topRight,
-                  colors: [
-                Colors.blue,
-                Colors.blue.shade300,
-              ])),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [
+                  Colors.blue,
+                  Colors.blue.shade300,
+                ])),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
                   child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Location finder
-                  LocationFinder(
-                    onSelectLocation: searchWeatherDetails,
-                    searchController: _searchController,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Location finder
+                      LocationFinder(
+                        onSelectLocation: searchWeatherDetails,
+                        searchController: _searchController,
+                      ),
+
+                      WeatherIcon(weatherDetails: weatherDetails),
+
+                      // weather description
+                      Text(
+                        ClimataUtil.getWeatherDescription(
+                            weatherDetails?['data']?[0]['weather']['code'],
+                            (weatherDetails?['data']?[0]['pod'] == "d")),
+                        textAlign: TextAlign.center,
+                        style: kTitleTextStyle,
+                      ),
+
+                      // current date display
+                      currentDateDisplay(),
+                    ],
                   ),
+                ),
+                // current location display
+                (weatherDetails != null ? currentLocationView() : Container()),
 
-                  WeatherIcon(weatherDetails: weatherDetails),
-
-                  // weather description
-                  Text(
-                    ClimataUtil.getWeatherDescription(
-                        weatherDetails?['data']?[0]['weather']['code'],
-                        (weatherDetails?['data']?[0]['pod'] == "d")),
-                    textAlign: TextAlign.center,
-                    style: kTitleTextStyle,
-                  ),
-
-                  // current date display
-                  currentDateDisplay(),
-                ],
-              )),
-              // current location display
-              (weatherDetails != null ? currentLocationView() : Container()),
-
-              // weather information card
-              WeatherInfoProvider(
-                weatherInfo: weatherDetails,
-                weatherForecast: weatherForecast,
-              )
-            ],
+                // weather information card
+                WeatherInfoProvider(
+                  weatherInfo: weatherDetails,
+                  weatherForecast: weatherForecast,
+                )
+              ],
+            ),
           ),
-        )),
+        ),
       ),
     );
   }
