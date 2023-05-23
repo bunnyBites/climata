@@ -37,9 +37,9 @@ class WeatherInfoProvider extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    weatherInfoContainer(Icons.thermostat_rounded, "Feels like",
+                    weatherInfoContainer(Icons.thermostat_rounded, "Feels like(\u00b0c)",
                         weatherInfo?['data']?[0]['app_temp']),
-                    weatherInfoContainer(Icons.air_outlined, "Wind Speed",
+                    weatherInfoContainer(Icons.air_outlined, "Wind Speed(m/s)",
                         weatherInfo?['data']?[0]['wind_spd']),
                   ],
                 ),
@@ -48,8 +48,8 @@ class WeatherInfoProvider extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     weatherInfoContainer(Icons.thunderstorm_outlined,
-                        "Precipitation", weatherInfo?['data']?[0]['pres']),
-                    weatherInfoContainer(Icons.speed_outlined, "Humidity",
+                        "Precipitation(mb)", weatherInfo?['data']?[0]['pres']),
+                    weatherInfoContainer(Icons.speed_outlined, "Humidity(%)",
                         weatherInfo?['data']?[0]['rh']),
                   ],
                 ),
